@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/remm9/crypt-pac.git"
+    "url": "git+https://github.com/remm9/crypt_pac.git"
   },
   "author": "rgonthcharov",
   "license": "ISC",
