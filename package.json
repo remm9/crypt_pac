@@ -21,9 +21,9 @@
   "author": "rgonthcharov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/remm9/crypt-pac/issues"
+    "url": "https://github.com/remm9/crypt_pac/issues"
   },
-  "homepage": "https://github.com/remm9/crypt-pac#readme",
+  "homepage": "https://github.com/remm9/crypt_pac#readme",
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",

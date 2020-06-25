@@ -1,0 +1,17 @@
+html, body, div {
+  box-sizing: border-box;
+  outline: transparent;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: black;
+}
+
+body > div {
+  margin: 120px auto;
+  text-align: center;
+}
