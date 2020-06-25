@@ -1,26 +1,26 @@
 import './styles/index.scss'
 import './styles/reset.scss'
 
-window.addEventListener("DOMContentLoaded", main);
+// window.addEventListener("DOMContentLoaded", main);
 
 const STONE = 1;
-const SAND = 4;
+const SAND = 2;
 const GROUND = 3;
-const COIN= 2;
+const COIN = 4;
 const PACMAN = 5;
 const KEY = 6;
 const DOOR = 7;
 
 let gameData = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-    [1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
-    [1, 2, 2, 2, 1, 1, 5, 1, 1, 2, 2, 2, 1],
-    [1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
-    [1, 2, 1, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [1, 6, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+    [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
+    [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
+    [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
+    [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
+    [1, 4, 1, 1, 4, 4, 1, 4, 4, 1, 1, 4, 1],
+    [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1]
 ];
 
 let map;
@@ -31,27 +31,41 @@ let pacman = {
     direction: 'right'
 };
 
+let door = {
+    x: 11,
+    y: 8,
+}
+
+let key = {
+    x: 1,
+    y: 1,
+}
+
+let score = 0;
+
+let level = 0;
+
 function createTiles(data) {
     let tilesArray = [];
     data.forEach(row => {
-        row.forEach(col => {
+        row.forEach(el => {
             let tile = document.createElement('div');
             tile.classList.add('tile');
 
-            if (col === STONE) {
+            if (el === STONE) {
                 tile.classList.add('stone');
-            } else if (col === COIN) {
-                tile.classList.add('coin');
-            } else if (col === GROUND) {
-                tile.classList.add('ground')
-            } else if (col === SAND) {
+            } else if (el === SAND) {
                 tile.classList.add('sand');
-            } else if (col === PACMAN) {
+            } else if (el === GROUND) {
+                tile.classList.add('ground')
+            } else if (el === COIN) {
+                tile.classList.add('coin');
+            } else if (el === PACMAN) {
                 tile.classList.add('pacman');
                 tile.classList.add(pacman.direction);
-            } else if (col === KEY) {
+            } else if (el === KEY) {
                 tile.classList.add('key');
-            } else if (col === DOOR) {
+            } else if (el === DOOR) {
                 tile.classList.add('door')
             }
             tilesArray.push(tile);
@@ -63,22 +77,34 @@ function createTiles(data) {
 }
 
 function drawMap() {
-    // debugger
     map = document.createElement('div');
     let tiles = createTiles(gameData);
     tiles.forEach(tile => { 
         map.appendChild(tile);
     });
-    document.body.appendChild(map);
+    document.getElementById('body').appendChild(map)
+    // document.body.appendChild(map);
+    
+}
+function screenScore() {
+    document.getElementById('score').textContent = "Score: " + score;
 }
 
 function eraseMap() {
-    document.body.removeChild(map);
+    document.getElementById('body').removeChild(map)
+    // document.body.removeChild(map);
 }
+
 
 function moveDown() {
     pacman.direction = 'down';
+    // console.log(gameData[pacman.y + 1][pacman.x] === 7)
+    // console.log(gameData[pacman.y + 1][pacman.x])
+    // console.log([pacman.x, pacman.y])
     if (gameData[pacman.y + 1][pacman.x] !== STONE) {
+        if (gameData[pacman.y + 1][pacman.x] === COIN) {
+            score = score += 10;
+        } 
         gameData[pacman.y][pacman.x] = GROUND;
         pacman.y = pacman.y + 1;
         gameData[pacman.y][pacman.x] = PACMAN;
@@ -88,6 +114,9 @@ function moveDown() {
 function moveUp() {
     pacman.direction = 'up';
     if (gameData[pacman.y - 1][pacman.x] !== STONE) {
+        if (gameData[pacman.y - 1][pacman.x] === COIN) {
+            score = score += 10;
+        }
         gameData[pacman.y][pacman.x] = GROUND;
         pacman.y = pacman.y - 1;
         gameData[pacman.y][pacman.x] = PACMAN;
@@ -97,6 +126,9 @@ function moveUp() {
 function moveLeft() {
     pacman.direction = 'left';
     if (gameData[pacman.y][pacman.x - 1] !== STONE) {
+        if (gameData[pacman.y][pacman.x - 1] === COIN) {
+            score = score += 10;
+        }
         gameData[pacman.y][pacman.x] = GROUND;
         pacman.x = pacman.x - 1;
         gameData[pacman.y][pacman.x] = PACMAN;
@@ -106,6 +138,9 @@ function moveLeft() {
 function moveRight() {
     pacman.direction = 'right';
     if (gameData[pacman.y][pacman.x + 1] !== STONE) {
+        if (gameData[pacman.y][pacman.x + 1] === COIN) {
+            score = score += 10;
+        }
         gameData[pacman.y][pacman.x] = GROUND;
         pacman.x = pacman.x + 1;
         gameData[pacman.y][pacman.x] = PACMAN;
@@ -126,6 +161,8 @@ function setupKeyboardControls() {
         }
         eraseMap();
         drawMap();
+        screenScore();
+        // console.log(score);
     });
 }
 
