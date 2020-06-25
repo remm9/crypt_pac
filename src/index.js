@@ -13,14 +13,14 @@ const DOOR = 7;
 
 let gameData = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+    [1, 6, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
     [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
     [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
     [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
     [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
     [1, 4, 1, 1, 4, 4, 1, 4, 4, 1, 1, 4, 1],
     [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1]
 ];
 
 let map;
@@ -30,6 +30,16 @@ let pacman = {
     y: 4,
     direction: 'right'
 };
+
+let door = {
+    x: 11,
+    y: 8,
+}
+
+let key = {
+    x: 1,
+    y: 1,
+}
 
 let score = 0;
 
@@ -77,28 +87,24 @@ function drawMap() {
     
 }
 function screenScore() {
-    // let screen = new Text("score: " + score);
-    // document.getElementById('score').appendChild(screen);
     document.getElementById('score').textContent = "Score: " + score;
-    // document.getElementById('score').last().update(screen);
 }
-
-function removeScore() {
-    // document.getElementById('score').remove();  
-}
-
 
 function eraseMap() {
     document.getElementById('body').removeChild(map)
     // document.body.removeChild(map);
 }
 
+
 function moveDown() {
     pacman.direction = 'down';
+    // console.log(gameData[pacman.y + 1][pacman.x] === 7)
+    // console.log(gameData[pacman.y + 1][pacman.x])
+    // console.log([pacman.x, pacman.y])
     if (gameData[pacman.y + 1][pacman.x] !== STONE) {
         if (gameData[pacman.y + 1][pacman.x] === COIN) {
             score = score += 10;
-        }
+        } 
         gameData[pacman.y][pacman.x] = GROUND;
         pacman.y = pacman.y + 1;
         gameData[pacman.y][pacman.x] = PACMAN;
@@ -155,16 +161,14 @@ function setupKeyboardControls() {
         }
         eraseMap();
         drawMap();
-        console.log(score);
         screenScore();
-        // removeScore();
+        // console.log(score);
     });
 }
 
 function main() {
     drawMap();
     setupKeyboardControls();
-    // screenScore();
 }
 
 main();
