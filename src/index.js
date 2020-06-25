@@ -20,7 +20,7 @@ let gameData = [
     [1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
     [1, 2, 1, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1],
     [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1]
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
 let map;
@@ -114,7 +114,7 @@ function moveRight() {
 
 function setupKeyboardControls() {
     document.addEventListener('keydown', function (e) {
-        console.log(e.keyCode);
+        // console.log(e.keyCode);
         if (e.keyCode === 37) {
             moveLeft();
         } else if (e.keyCode === 38) {
@@ -130,8 +130,8 @@ function setupKeyboardControls() {
 }
 
 function main() {
-    setupKeyboardControls();
     drawMap();
+    setupKeyboardControls();
 }
 
 main();
