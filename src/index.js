@@ -4,22 +4,22 @@ import './styles/reset.scss'
 window.addEventListener("DOMContentLoaded", main);
 
 const STONE = 1;
-const SAND = 4;
+const SAND = 2;
 const GROUND = 3;
-const COIN= 2;
+const COIN = 4;
 const PACMAN = 5;
 const KEY = 6;
 const DOOR = 7;
 
 let gameData = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-    [1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
-    [1, 2, 2, 2, 1, 1, 5, 1, 1, 2, 2, 2, 1],
-    [1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
-    [1, 2, 1, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
+    [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+    [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
+    [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
+    [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
+    [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
+    [1, 4, 1, 1, 4, 4, 1, 4, 4, 1, 1, 4, 1],
+    [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
@@ -31,27 +31,29 @@ let pacman = {
     direction: 'right'
 };
 
+let score = 0;
+
 function createTiles(data) {
     let tilesArray = [];
     data.forEach(row => {
-        row.forEach(col => {
+        row.forEach(el => {
             let tile = document.createElement('div');
             tile.classList.add('tile');
 
-            if (col === STONE) {
+            if (el === STONE) {
                 tile.classList.add('stone');
-            } else if (col === COIN) {
-                tile.classList.add('coin');
-            } else if (col === GROUND) {
-                tile.classList.add('ground')
-            } else if (col === SAND) {
+            } else if (el === SAND) {
                 tile.classList.add('sand');
-            } else if (col === PACMAN) {
+            } else if (el === GROUND) {
+                tile.classList.add('ground')
+            } else if (el === COIN) {
+                tile.classList.add('coin');
+            } else if (el === PACMAN) {
                 tile.classList.add('pacman');
                 tile.classList.add(pacman.direction);
-            } else if (col === KEY) {
+            } else if (el === KEY) {
                 tile.classList.add('key');
-            } else if (col === DOOR) {
+            } else if (el === DOOR) {
                 tile.classList.add('door')
             }
             tilesArray.push(tile);
@@ -69,11 +71,18 @@ function drawMap() {
     tiles.forEach(tile => { 
         map.appendChild(tile);
     });
-    document.body.appendChild(map);
+    // if (document.body != null) {
+    //     document.body.appendChild(map);
+    // }
+    // document.body.appendChild(map);
+    document.getElementById('body').appendChild(map)
+    // document.querySelector('body').appendChild(map);
 }
 
 function eraseMap() {
-    document.body.removeChild(map);
+    document.getElementById('body').removeChild(map)
+
+    // document.body.removeChild(map);
 }
 
 function moveDown() {
