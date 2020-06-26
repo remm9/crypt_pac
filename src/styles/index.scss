@@ -55,8 +55,22 @@
 }
 
 #score {
-  margin-top: 100px;
   color: red;
+}
+
+#level {
+  color: green;
+}
+
+#game-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 78%;
+  margin: auto;
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #body {
