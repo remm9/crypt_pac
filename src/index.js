@@ -127,9 +127,9 @@ function gameOver() {
 
 function levelChange() {
     if (grid[pacman.y][pacman.x] === grid[door.y][door.x]) {
+        level = 2;
         pacman.direction = "up";
         grid = gameData[1];
-        level = 2;
         // alert("You are in Level 1")
     }
 }
@@ -143,7 +143,7 @@ function screenScore() {
 }
 
 function doorUnlock() {
-    if (grid[key.y][key.x] !== KEY) {
+    if (grid[key.y][key.x] !== KEY || level === 1) {
         grid[door.y][door.x] = GROUND;
     }
 }
