@@ -42,6 +42,7 @@ let gameData = [
 let grid = gameData[0]
 let level = 1;
 let score = 0;
+let playing = true;
 let map;
 let playing = true;
 
@@ -95,11 +96,11 @@ function createTiles(data) {
 }
 
 function drawMap() {
-    if (playing) { 
+    if (playing) {
         map = document.createElement('div');
         // console.log(grid)
         let tiles = createTiles(grid);
-        tiles.forEach(tile => { 
+        tiles.forEach(tile => {
             map.appendChild(tile);
         });
         document.getElementById('body').appendChild(map)
@@ -120,11 +121,14 @@ function gameOver() {
                 || (grid[pacman.y][pacman.x + 1] === MUMMY)
                 || (grid[pacman.y][pacman.x - 1] === MUMMY)) { 
         document.getElementById('game-over').textContent = "Game over"
+        eraseMap();
+        playing = false;
     }
 }
 
 function levelChange() {
     if (grid[pacman.y][pacman.x] === grid[door.y][door.x]) {
+        pacman.direction = "up";
         grid = gameData[1];
         level = 2;
         // alert("You are in Level 1")
