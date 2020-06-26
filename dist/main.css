@@ -1,0 +1,6 @@
+.tile{width:50px;height:50px;display:inline-block;vertical-align:top}.stone{background-image:url(images/stonewall.png);background-size:contain;border:2px solid grey}.sand{background-image:url(images/sandwall.png);background-size:contain;border:2px solid orange}.key{background-image:url(images/key.png);background-size:contain}.door{background-image:url(images/door.png);background-size:cover;border:2px solid orange;background-color:#e4e4e4}.coin{background-color:yellow;border-radius:50%;transform:scale(0.25)}.pacman{background-image:url(images/pacman.png);background-size:contain}.left{background-image:url(images/pacman-left.png)}.up{background-image:url(images/pacman-up.png)}.down{background-image:url(images/pacman-down.png)}.mummy{background-image:url(images/mummy.png);background-size:contain}#score{color:red}#level{color:green}#game-info{display:flex;flex-direction:row;justify-content:space-around;width:78%;margin:auto;margin-top:50px;font-size:20px;font-weight:bold}#body{margin-top:10px}
+
+html,body,div{box-sizing:border-box;outline:transparent}*,*:before,*:after{box-sizing:inherit}body{background-color:black}body>div{text-align:center}
+
+
+/*# sourceMappingURL=main.css.map*/
