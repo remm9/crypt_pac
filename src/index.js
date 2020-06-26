@@ -109,11 +109,12 @@ function eraseMap() {
     // document.body.removeChild(map);
 }
 
-function gameOver() {
-    if (score === 1050) { 
-        eraseMap() 
-        alert("You win!")
-    };
+function gameOver(won) {
+    if (score === 1010) { 
+        document.getElementById('game-over').textContent = "You win!!!"
+    } else { 
+        // document.getElementById('game-over').textContent = "Game over"
+    }
 }
 
 function levelChange() {
@@ -198,6 +199,8 @@ function setupKeyboardControls() {
             moveRight();
         } else if (e.keyCode === 40) {
             moveDown();
+        } else if (e.keyCode === 81) {
+            window.location.reload();
         }
         screenLevel();
         screenScore();
