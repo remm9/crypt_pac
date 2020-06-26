@@ -43,6 +43,7 @@ let grid = gameData[0]
 let level = 1;
 let score = 0;
 let map;
+let playing = true;
 
 let pacman = {
     x: 6,
@@ -94,14 +95,16 @@ function createTiles(data) {
 }
 
 function drawMap() {
-    map = document.createElement('div');
-    // console.log(grid)
-    let tiles = createTiles(grid);
-    tiles.forEach(tile => { 
-        map.appendChild(tile);
-    });
-    document.getElementById('body').appendChild(map)
-    // document.body.appendChild(map);
+    if (playing) { 
+        map = document.createElement('div');
+        // console.log(grid)
+        let tiles = createTiles(grid);
+        tiles.forEach(tile => { 
+            map.appendChild(tile);
+        });
+        document.getElementById('body').appendChild(map)
+        // document.body.appendChild(map);
+    }
 }
 
 function eraseMap() {
