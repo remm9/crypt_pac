@@ -7,7 +7,6 @@ Crypt Pack is a game inspired by Crypt Rider and Pacman. The objective of the ga
   ### the user will be able 
   - start a game 
   - move around crypt
-  - 
   - abort game
   
   ### will be given three lives  
