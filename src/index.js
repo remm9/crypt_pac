@@ -84,10 +84,6 @@ function drawMap() {
     });
     document.getElementById('body').appendChild(map)
     // document.body.appendChild(map);
-    
-}
-function screenScore() {
-    document.getElementById('score').textContent = "Score: " + score;
 }
 
 function eraseMap() {
@@ -95,20 +91,27 @@ function eraseMap() {
     // document.body.removeChild(map);
 }
 
+function screenScore() {
+    document.getElementById('score').textContent = "Score: " + score;
+}
+
+function doorUnlock() {
+    if (gameData[key.y][key.x] !== KEY) {
+        gameData[door.y][door.x] = GROUND;
+    }
+}
 
 function moveDown() {
     pacman.direction = 'down';
-    // console.log(gameData[pacman.y + 1][pacman.x] === 7)
-    // console.log(gameData[pacman.y + 1][pacman.x])
-    // console.log([pacman.x, pacman.y])
-    if (gameData[pacman.y + 1][pacman.x] !== STONE) {
+   
+    if ((gameData[pacman.y + 1][pacman.x] !== STONE) && (gameData[pacman.y + 1][pacman.x] !== DOOR)) {
         if (gameData[pacman.y + 1][pacman.x] === COIN) {
             score = score += 10;
         } 
         gameData[pacman.y][pacman.x] = GROUND;
         pacman.y = pacman.y + 1;
         gameData[pacman.y][pacman.x] = PACMAN;
-    }
+    } 
 }
 
 function moveUp() {
@@ -162,7 +165,7 @@ function setupKeyboardControls() {
         eraseMap();
         drawMap();
         screenScore();
-        // console.log(score);
+        doorUnlock();
     });
 }
 
