@@ -109,11 +109,14 @@ function eraseMap() {
     // document.body.removeChild(map);
 }
 
-function gameOver(won) {
+function gameOver() {
     if (score === 1010) { 
         document.getElementById('game-over').textContent = "You win!!!"
-    } else { 
-        // document.getElementById('game-over').textContent = "Game over"
+    } else if ((grid[pacman.y + 1][pacman.x] === MUMMY) 
+                || (grid[pacman.y - 1][pacman.x] === MUMMY)
+                || (grid[pacman.y][pacman.x + 1] === MUMMY)
+                || (grid[pacman.y][pacman.x - 1] === MUMMY)) { 
+        document.getElementById('game-over').textContent = "Game over"
     }
 }
 
@@ -199,7 +202,7 @@ function setupKeyboardControls() {
             moveRight();
         } else if (e.keyCode === 40) {
             moveDown();
-        } else if (e.keyCode === 81) {
+        } else if (e.keyCode === 82) {
             window.location.reload();
         }
         screenLevel();
