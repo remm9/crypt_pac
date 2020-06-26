@@ -10,19 +10,38 @@ const COIN = 4;
 const PACMAN = 5;
 const KEY = 6;
 const DOOR = 7;
+const MUMMY = 8;
 
 let gameData = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 6, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
-    [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
-    [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
-    [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
-    [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
-    [1, 4, 1, 1, 4, 4, 1, 4, 4, 1, 1, 4, 1],
-    [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1]
+    [ 
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 6, 4, 4, 4, 8, 1, 4, 4, 4, 4, 4, 1],
+        [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
+        [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
+        [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
+        [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
+        [1, 4, 1, 1, 4, 4, 1, 4, 4, 1, 1, 4, 1],
+        [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1] 
+    ],
+
+    [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 4, 1, 4, 1, 8, 1, 4, 4, 4, 4, 4, 1],
+        [1, 4, 1, 4, 1, 4, 1, 4, 1, 1, 1, 4, 1],
+        [1, 4, 1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 1],
+        [1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1],
+        [1, 4, 1, 1, 1, 4, 4, 4, 4, 4, 1, 4, 1],
+        [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
+        [1, 4, 4, 8, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1]
+    ],
+
 ];
 
+let grid = gameData[0]
+let level = 1;
+let score = 0;
 let map;
 
 let pacman = {
@@ -40,10 +59,6 @@ let key = {
     x: 1,
     y: 1,
 }
-
-let score = 0;
-
-let level = 0;
 
 function createTiles(data) {
     let tilesArray = [];
@@ -67,6 +82,8 @@ function createTiles(data) {
                 tile.classList.add('key');
             } else if (el === DOOR) {
                 tile.classList.add('door')
+            } else if (el === MUMMY) {
+                tile.classList.add('mummy');
             }
             tilesArray.push(tile);
         }) 
@@ -78,16 +95,13 @@ function createTiles(data) {
 
 function drawMap() {
     map = document.createElement('div');
-    let tiles = createTiles(gameData);
+    // console.log(grid)
+    let tiles = createTiles(grid);
     tiles.forEach(tile => { 
         map.appendChild(tile);
     });
     document.getElementById('body').appendChild(map)
     // document.body.appendChild(map);
-    
-}
-function screenScore() {
-    document.getElementById('score').textContent = "Score: " + score;
 }
 
 function eraseMap() {
@@ -95,55 +109,81 @@ function eraseMap() {
     // document.body.removeChild(map);
 }
 
+function gameOver() {
+    if (score === 1050) { 
+        eraseMap() 
+        alert("You win!")
+    };
+}
+
+function levelChange() {
+    if (grid[pacman.y][pacman.x] === grid[door.y][door.x]) {
+        grid = gameData[1];
+        level = 2;
+        // alert("You are in Level 1")
+    }
+}
+
+function screenLevel() {
+    document.getElementById('level').textContent = "Level: " + level;
+}
+
+function screenScore() {
+    document.getElementById('score').textContent = "Score: " + score;
+}
+
+function doorUnlock() {
+    if (grid[key.y][key.x] !== KEY) {
+        grid[door.y][door.x] = GROUND;
+    }
+}
 
 function moveDown() {
     pacman.direction = 'down';
-    // console.log(gameData[pacman.y + 1][pacman.x] === 7)
-    // console.log(gameData[pacman.y + 1][pacman.x])
-    // console.log([pacman.x, pacman.y])
-    if (gameData[pacman.y + 1][pacman.x] !== STONE) {
-        if (gameData[pacman.y + 1][pacman.x] === COIN) {
+   
+    if ((grid[pacman.y + 1][pacman.x] !== STONE) && (grid[pacman.y + 1][pacman.x] !== DOOR)) {
+        if (grid[pacman.y + 1][pacman.x] === COIN) {
             score = score += 10;
         } 
-        gameData[pacman.y][pacman.x] = GROUND;
+        grid[pacman.y][pacman.x] = GROUND;
         pacman.y = pacman.y + 1;
-        gameData[pacman.y][pacman.x] = PACMAN;
-    }
+        grid[pacman.y][pacman.x] = PACMAN;
+    } 
 }
 
 function moveUp() {
     pacman.direction = 'up';
-    if (gameData[pacman.y - 1][pacman.x] !== STONE) {
-        if (gameData[pacman.y - 1][pacman.x] === COIN) {
+    if (grid[pacman.y - 1][pacman.x] !== STONE) {
+        if (grid[pacman.y - 1][pacman.x] === COIN) {
             score = score += 10;
         }
-        gameData[pacman.y][pacman.x] = GROUND;
+        grid[pacman.y][pacman.x] = GROUND;
         pacman.y = pacman.y - 1;
-        gameData[pacman.y][pacman.x] = PACMAN;
+        grid[pacman.y][pacman.x] = PACMAN;
     }
 }
 
 function moveLeft() {
     pacman.direction = 'left';
-    if (gameData[pacman.y][pacman.x - 1] !== STONE) {
-        if (gameData[pacman.y][pacman.x - 1] === COIN) {
+    if (grid[pacman.y][pacman.x - 1] !== STONE) {
+        if (grid[pacman.y][pacman.x - 1] === COIN) {
             score = score += 10;
         }
-        gameData[pacman.y][pacman.x] = GROUND;
+        grid[pacman.y][pacman.x] = GROUND;
         pacman.x = pacman.x - 1;
-        gameData[pacman.y][pacman.x] = PACMAN;
+        grid[pacman.y][pacman.x] = PACMAN;
     }
 }
 
 function moveRight() {
     pacman.direction = 'right';
-    if (gameData[pacman.y][pacman.x + 1] !== STONE) {
-        if (gameData[pacman.y][pacman.x + 1] === COIN) {
+    if (grid[pacman.y][pacman.x + 1] !== STONE) {
+        if (grid[pacman.y][pacman.x + 1] === COIN) {
             score = score += 10;
         }
-        gameData[pacman.y][pacman.x] = GROUND;
+        grid[pacman.y][pacman.x] = GROUND;
         pacman.x = pacman.x + 1;
-        gameData[pacman.y][pacman.x] = PACMAN;
+        grid[pacman.y][pacman.x] = PACMAN;
     }
 }
 
@@ -159,10 +199,13 @@ function setupKeyboardControls() {
         } else if (e.keyCode === 40) {
             moveDown();
         }
+        screenLevel();
+        screenScore();
+        doorUnlock();
+        levelChange();
         eraseMap();
         drawMap();
-        screenScore();
-        // console.log(score);
+        gameOver();
     });
 }
 
