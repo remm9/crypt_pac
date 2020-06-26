@@ -42,6 +42,7 @@ let gameData = [
 let grid = gameData[0]
 let level = 1;
 let score = 0;
+let playing = true;
 let map;
 
 let pacman = {
@@ -94,14 +95,16 @@ function createTiles(data) {
 }
 
 function drawMap() {
-    map = document.createElement('div');
-    // console.log(grid)
-    let tiles = createTiles(grid);
-    tiles.forEach(tile => { 
-        map.appendChild(tile);
-    });
-    document.getElementById('body').appendChild(map)
-    // document.body.appendChild(map);
+    if (playing) {
+        map = document.createElement('div');
+        // console.log(grid)
+        let tiles = createTiles(grid);
+        tiles.forEach(tile => {
+            map.appendChild(tile);
+        });
+        document.getElementById('body').appendChild(map)
+        // document.body.appendChild(map);
+    }
 }
 
 function eraseMap() {
@@ -117,6 +120,8 @@ function gameOver() {
                 || (grid[pacman.y][pacman.x + 1] === MUMMY)
                 || (grid[pacman.y][pacman.x - 1] === MUMMY)) { 
         document.getElementById('game-over').textContent = "Game over"
+        eraseMap();
+        playing = false;
     }
 }
 
