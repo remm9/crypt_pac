@@ -127,6 +127,7 @@ function gameOver() {
 
 function levelChange() {
     if (grid[pacman.y][pacman.x] === grid[door.y][door.x]) {
+        pacman.direction = "up";
         grid = gameData[1];
         level = 2;
         // alert("You are in Level 1")
