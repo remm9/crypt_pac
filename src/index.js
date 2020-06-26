@@ -10,11 +10,12 @@ const COIN = 4;
 const PACMAN = 5;
 const KEY = 6;
 const DOOR = 7;
+const MUMMY = 8;
 
 let gameData = [
     [ 
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 6, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+        [1, 6, 4, 4, 4, 8, 1, 4, 4, 4, 4, 4, 1],
         [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
         [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
         [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
@@ -26,13 +27,13 @@ let gameData = [
 
     [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 4, 1, 4, 1, 4, 1, 4, 4, 4, 4, 4, 1],
+        [1, 4, 1, 4, 1, 8, 1, 4, 4, 4, 4, 4, 1],
         [1, 4, 1, 4, 1, 4, 1, 4, 1, 1, 1, 4, 1],
         [1, 4, 1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 1],
         [1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1],
         [1, 4, 1, 1, 1, 4, 4, 4, 4, 4, 1, 4, 1],
         [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
-        [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+        [1, 4, 4, 8, 4, 4, 1, 4, 4, 4, 4, 4, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1]
     ],
 
@@ -81,6 +82,8 @@ function createTiles(data) {
                 tile.classList.add('key');
             } else if (el === DOOR) {
                 tile.classList.add('door')
+            } else if (el === MUMMY) {
+                tile.classList.add('mummy');
             }
             tilesArray.push(tile);
         }) 
@@ -106,6 +109,13 @@ function eraseMap() {
     // document.body.removeChild(map);
 }
 
+function gameOver() {
+    if (score === 1050) { 
+        eraseMap() 
+        alert("You win!")
+    };
+}
+
 function levelChange() {
     if (grid[pacman.y][pacman.x] === grid[door.y][door.x]) {
         grid = gameData[1];
@@ -115,7 +125,6 @@ function levelChange() {
 }
 
 function screenLevel() {
-    console.log(level)
     document.getElementById('level').textContent = "Level: " + level;
 }
 
@@ -196,6 +205,7 @@ function setupKeyboardControls() {
         levelChange();
         eraseMap();
         drawMap();
+        gameOver();
     });
 }
 

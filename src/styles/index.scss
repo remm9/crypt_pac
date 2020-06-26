@@ -54,6 +54,11 @@
   background-image: url('../images/pacman-down.png');
 }
 
+.mummy {
+  background-image: url('../images/mummy.png');
+  background-size: contain;
+}
+
 #score {
   color: red;
 }
