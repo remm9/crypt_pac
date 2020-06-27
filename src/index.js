@@ -45,7 +45,6 @@ let level = 1;
 let score = 0;
 let playing = true;
 let map;
-let playing = true;
 
 let pacman = {
     x: 6,
