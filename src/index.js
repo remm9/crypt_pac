@@ -31,10 +31,11 @@ let gameData = [
         [1, 4, 1, 4, 1, 4, 1, 4, 1, 1, 1, 4, 1],
         [1, 4, 1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 1],
         [1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1],
-        [1, 4, 1, 1, 1, 4, 4, 4, 4, 4, 1, 4, 1],
-        [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
-        [1, 4, 4, 8, 4, 4, 1, 4, 4, 4, 4, 4, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1]
+        [1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 4, 4, 1],
+        [1, 4, 1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 1],
+        [1, 4, 1, 4, 1, 4, 1, 4, 1, 1, 1, 4, 1],
+        [1, 4, 4, 8, 4, 4, 1, 4, 4, 4, 4, 5, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ],
 
 ];
@@ -52,6 +53,11 @@ let pacman = {
     direction: 'right'
 };
 
+let ghost = {
+    x: 5,
+    y: 1,
+};
+
 let door = {
     x: 11,
     y: 8,
@@ -60,6 +66,20 @@ let door = {
 let key = {
     x: 1,
     y: 1,
+}
+
+let musicPlay;
+
+function toggleMute() {
+    const audio = document.getElementsByTagName('audio')[0];
+    if (musicPlay == true) {
+        musicPlay = false;
+        audio.pause();
+    } else {
+        musicPlay = true;
+        audio.play();
+    }
+    return musicPlay;
 }
 
 function createTiles(data) {
@@ -129,7 +149,7 @@ function gameOver() {
 function levelChange() {
     if (grid[pacman.y][pacman.x] === grid[door.y][door.x]) {
         level = 2;
-        pacman.direction = "up";
+        pacman.direction = "left";
         grid = gameData[1];
         // alert("You are in Level 1")
     }
@@ -144,8 +164,20 @@ function screenScore() {
 }
 
 function doorUnlock() {
-    if (grid[key.y][key.x] !== KEY || level === 1) {
+    if (grid[key.y][key.x] !== KEY && level === 1) {
         grid[door.y][door.x] = GROUND;
+    }
+}
+
+function moveGhost() {
+    if ((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== DOOR)) {
+        // if (pacman to left) turn left
+        // if (pacman to right) turn right
+    } else {
+        // go straight
+        // if (ghost touched pacman) {
+        //     pacman_dead = true
+        // }
     }
 }
 
@@ -200,7 +232,7 @@ function moveRight() {
 
 function setupKeyboardControls() {
     document.addEventListener('keydown', function (e) {
-        // console.log(e.keyCode);
+        console.log(e.keyCode);
         if (e.keyCode === 37) {
             moveLeft();
         } else if (e.keyCode === 38) {
@@ -211,6 +243,8 @@ function setupKeyboardControls() {
             moveDown();
         } else if (e.keyCode === 82) {
             window.location.reload();
+        } else if (e.keyCode === 77) {
+            toggleMute();
         }
         screenLevel();
         screenScore();
