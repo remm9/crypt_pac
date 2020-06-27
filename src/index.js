@@ -52,6 +52,11 @@ let pacman = {
     direction: 'right'
 };
 
+let ghost = {
+    x: 5,
+    y: 1,
+};
+
 let door = {
     x: 11,
     y: 8,
@@ -60,6 +65,20 @@ let door = {
 let key = {
     x: 1,
     y: 1,
+}
+
+let musicPlay;
+
+function toggleMute() {
+    const audio = document.getElementsByTagName('audio')[0];
+    if (musicPlay == true) {
+        musicPlay = false;
+        audio.pause();
+    } else {
+        musicPlay = true;
+        audio.play();
+    }
+    return musicPlay;
 }
 
 function createTiles(data) {
@@ -149,6 +168,18 @@ function doorUnlock() {
     }
 }
 
+function moveGhost() {
+    if ((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== DOOR)) {
+        // if (pacman to left) turn left
+        // if (pacman to right) turn right
+    } else {
+        // go straight
+        // if (ghost touched pacman) {
+        //     pacman_dead = true
+        // }
+    }
+}
+
 function moveDown() {
     pacman.direction = 'down';
    
@@ -200,7 +231,7 @@ function moveRight() {
 
 function setupKeyboardControls() {
     document.addEventListener('keydown', function (e) {
-        // console.log(e.keyCode);
+        console.log(e.keyCode);
         if (e.keyCode === 37) {
             moveLeft();
         } else if (e.keyCode === 38) {
@@ -211,6 +242,8 @@ function setupKeyboardControls() {
             moveDown();
         } else if (e.keyCode === 82) {
             window.location.reload();
+        } else if (e.keyCode === 77) {
+            toggleMute();
         }
         screenLevel();
         screenScore();

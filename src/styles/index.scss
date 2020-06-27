@@ -7,24 +7,24 @@
 }
 
 .stone {
-    background-image: url('../images/stonewall.png');
+    background-image: url('../assets/images/stonewall.png');
     background-size: contain;
     border: 2px solid #B9B799;
 }
 
 .sand {
-    background-image: url('../images/sandwall.png');
+    background-image: url('../assets/images/sandwall.png');
     background-size: contain;
     border: 2px solid orange;
 }
 
 .key {
-    background-image: url('../images/key.png');
+    background-image: url('../assets/images/key.png');
     background-size: contain;
 }
 
 .door {
-    background-image: url('../images/door.png');
+    background-image: url('../assets/images/door.png');
     background-size: cover;
     border: 2px solid orange;
     background-color: rgb(228, 228, 228);
@@ -37,24 +37,24 @@
 }
 
 .pacman {
-  background-image: url('../images/pacman.png');
+  background-image: url('../assets/images/pacman.png');
   background-size: contain;
 }
 
 .left {
-  background-image: url('../images/pacman-left.png');
+  background-image: url('../assets/images/pacman-left.png');
 }
 
 .up {
-  background-image: url('../images/pacman-up.png');
+  background-image: url('../assets/images/pacman-up.png');
 }
 
 .down {
-  background-image: url('../images/pacman-down.png');
+  background-image: url('../assets/images/pacman-down.png');
 }
 
 .mummy {
-  background-image: url('../images/mummy.png');
+  background-image: url('../assets/images/mummy.png');
   background-size: contain;
 }
 
@@ -64,6 +64,10 @@
 
 #level {
   color: green;
+}
+
+#music {
+  color: yellow;
 }
 
 #game-info {
