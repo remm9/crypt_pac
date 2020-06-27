@@ -31,10 +31,11 @@ let gameData = [
         [1, 4, 1, 4, 1, 4, 1, 4, 1, 1, 1, 4, 1],
         [1, 4, 1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 1],
         [1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 1],
-        [1, 4, 1, 1, 1, 4, 4, 4, 4, 4, 1, 4, 1],
-        [1, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
-        [1, 4, 4, 8, 4, 4, 1, 4, 4, 4, 4, 4, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1]
+        [1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 4, 4, 1],
+        [1, 4, 1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 1],
+        [1, 4, 1, 4, 1, 4, 1, 4, 1, 1, 1, 4, 1],
+        [1, 4, 4, 8, 4, 4, 1, 4, 4, 4, 4, 5, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ],
 
 ];
@@ -128,7 +129,7 @@ function gameOver() {
 function levelChange() {
     if (grid[pacman.y][pacman.x] === grid[door.y][door.x]) {
         level = 2;
-        pacman.direction = "up";
+        pacman.direction = "left";
         grid = gameData[1];
         // alert("You are in Level 1")
     }
@@ -143,7 +144,7 @@ function screenScore() {
 }
 
 function doorUnlock() {
-    if (grid[key.y][key.x] !== KEY || level === 1) {
+    if (grid[key.y][key.x] !== KEY && level === 1) {
         grid[door.y][door.x] = GROUND;
     }
 }
