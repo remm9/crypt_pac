@@ -195,6 +195,8 @@ function moveGhost() {
     } 
 }
 
+// moveGhost.setTimeout(3000)
+
 
 function moveDown() {
     pacman.direction = 'down';
