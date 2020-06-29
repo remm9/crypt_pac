@@ -171,26 +171,30 @@ function doorUnlock() {
 }
 
 function moveGhost() {
-    // console.log((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== DOOR))
-    console.log(playing)
-    // while (playing === true) { 
-        if ((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== DOOR)
-            // || (grid[ghost.y - 1][ghost.x] !== STONE)
-            // || (grid[ghost.y][ghost.x + 1] !== STONE)
-            // || (grid[ghost.y][ghost.x - 1] !== STONE)
-        ) {
-            // if (pacman to left) turn left
-            // if (pacman to right) turn right
-            grid[ghost.y + 1][ghost.x] = MUMMY;
+
+    if ((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== DOOR)
+    ) {
+        // if (pacman to left) turn left
+        // if (pacman to right) turn right
+        grid[ghost.y][ghost.x] = COIN;
+        ghost.y = ghost.y + 1;
+        grid[ghost.y + 1][ghost.x] = MUMMY;
+        if (grid[ghost.y][ghost.x + 1] !== STONE) { 
+            grid[ghost.x + 1][ghost.x] = MUMMY;
+            ghost.y = ghost.x + 1;
             grid[ghost.y][ghost.x] = COIN;
-        } else {
-            // go straight
-            // if (ghost touched pacman) {
-            //     pacman_dead = true
-            // }
-        }
-    // }
+        } else if (grid[ghost.y][ghost.x - 1] !== STONE) {
+            grid[ghost.x - 1][ghost.x] = MUMMY;
+            ghost.y = ghost.x - 1;
+            grid[ghost.y][ghost.x] = COIN;
+        } else if (grid[ghost.y - 1][ghost.x] !== STONE) {
+            grid[ghost.y - 1][ghost.x] = MUMMY;
+            ghost.y = ghost.y - 1;
+            grid[ghost.y][ghost.x] = COIN;
+        } 
+    } 
 }
+
 
 function moveDown() {
     pacman.direction = 'down';
@@ -261,7 +265,8 @@ function setupKeyboardControls() {
         screenScore();
         doorUnlock();
         levelChange();
-        moveGhost()
+        moveGhost();
+        // setTimeout(moveGhost(), 3000);
         eraseMap();
         drawMap();
         gameOver();
