@@ -73,8 +73,8 @@
 #game-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  width: 71%;
+  justify-content: space-between;
+  width: 650px;
   margin: auto;
   margin-top: 50px;
   font-size: 20px;
@@ -84,8 +84,8 @@
 #game-controls {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  width: 78%;
+  justify-content: space-between;
+  width: 670px;
   margin: auto;
   font-size: 20px;
   font-weight: bold;
@@ -96,7 +96,7 @@
 }
 
 #game-over {
-  margin-top: 128px;
+  margin-top: 115px;
   font-size: 60px;
   font-weight: bold;
   color: white;
