@@ -74,9 +74,11 @@ function toggleMute() {
     if (musicPlay == true) {
         musicPlay = false;
         audio.pause();
+        document.getElementById('background-music').textContent = "Press M to unmute";
     } else {
         musicPlay = true;
         audio.play();
+        document.getElementById('background-music').textContent = "Press M to mute";
     }
     return musicPlay;
 }
