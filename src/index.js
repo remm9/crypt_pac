@@ -171,15 +171,25 @@ function doorUnlock() {
 }
 
 function moveGhost() {
-    if ((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== DOOR)) {
-        // if (pacman to left) turn left
-        // if (pacman to right) turn right
-    } else {
-        // go straight
-        // if (ghost touched pacman) {
-        //     pacman_dead = true
-        // }
-    }
+    // console.log((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== DOOR))
+    console.log(playing)
+    // while (playing === true) { 
+        if ((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== DOOR)
+            // || (grid[ghost.y - 1][ghost.x] !== STONE)
+            // || (grid[ghost.y][ghost.x + 1] !== STONE)
+            // || (grid[ghost.y][ghost.x - 1] !== STONE)
+        ) {
+            // if (pacman to left) turn left
+            // if (pacman to right) turn right
+            grid[ghost.y + 1][ghost.x] = MUMMY;
+            grid[ghost.y][ghost.x] = COIN;
+        } else {
+            // go straight
+            // if (ghost touched pacman) {
+            //     pacman_dead = true
+            // }
+        }
+    // }
 }
 
 function moveDown() {
@@ -233,7 +243,7 @@ function moveRight() {
 
 function setupKeyboardControls() {
     document.addEventListener('keydown', function (e) {
-        console.log(e.keyCode);
+        // console.log(e.keyCode);
         if (e.keyCode === 37) {
             moveLeft();
         } else if (e.keyCode === 38) {
@@ -251,6 +261,7 @@ function setupKeyboardControls() {
         screenScore();
         doorUnlock();
         levelChange();
+        moveGhost()
         eraseMap();
         drawMap();
         gameOver();
