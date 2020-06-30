@@ -15,8 +15,8 @@ const MUMMY = 8;
 let gameData = [
     [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
-        [1, 4, 6, 1, 1, 8, 1, 4, 1, 1, 1, 4, 1],
+        [1, 4, 4, 4, 4, 8, 1, 4, 4, 4, 4, 4, 1],
+        [1, 4, 6, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
         [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
         [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
         [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
@@ -54,7 +54,7 @@ let pacman = {
 
 let ghost = {
     x: 5,
-    y: 2
+    y: 1
 };
 
 // let ghosts = [
@@ -222,7 +222,7 @@ function moveGhost() {
 
     if ((pacman.x > ghost.x) && (pacman.y > ghost.y)) {
         moveGhostDown();
-        moveGhostRight();
+        // moveGhostRight();
     } else if ((pacman.x < ghost.x) && (pacman.y < ghost.y)) {
         moveGhostUp();
         moveGhostLeft();
