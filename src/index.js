@@ -1,17 +1,17 @@
 import './styles/index.scss'
 import './styles/reset.scss'
 import { toggleMute } from './scripts/music.js'
+import { moveGhost } from './scripts/ghost.js'
+ 
 
-// window.addEventListener("DOMContentLoaded", main);
-
-const STONE = 1;
-const SAND = 2;
-const GROUND = 3;
-const COIN = 4;
-const PACMAN = 5;
-const KEY = 6;
-const DOOR = 7;
-const MUMMY = 8;
+export const STONE = 1;
+export const SAND = 2;
+export const GROUND = 3;
+export const COIN = 4;
+export const PACMAN = 5;
+export const KEY = 6;
+export const DOOR = 7;
+export const MUMMY = 8;
 
 let gameData = [
     [
@@ -41,28 +41,22 @@ let gameData = [
 
 ];
 
-let grid = gameData[0]
+export let grid = gameData[0]
+export let score = 0;
 let level = 1;
-let score = 0;
 let playing = true;
 let map;
 
-let pacman = {
+export let pacman = {
     x: 6,
     y: 4,
     direction: 'right'
 };
 
-let ghost = {
+export let ghost = {
     x: 5,
     y: 1
 };
-
-// let ghosts = [
-//     { x: 5, y: 1,}, 
-//     { x: 11, y: 1,}, 
-// ];
-
 
 let door = {
     x: 11,
@@ -171,57 +165,6 @@ function doorUnlock() {
     }
 }
 
-
-function moveGhostDown() {
-    if ((grid[ghost.y + 1][ghost.x] !== STONE)) {
-        let last = grid[ghost.y + 1][ghost.x];
-        grid[ghost.y][ghost.x] = last;
-        ghost.y = ghost.y + 1;
-        grid[ghost.y][ghost.x] = MUMMY;
-    }
-}
-
-function moveGhostRight() {
-    if ((grid[ghost.y][ghost.x + 1] !== STONE) && (grid[ghost.y][ghost.x + 1] !== KEY)) {
-        let last = grid[ghost.y][ghost.x + 1];
-        grid[ghost.y][ghost.x] = last;
-        ghost.x = ghost.x + 1;
-        grid[ghost.y][ghost.x] = MUMMY;
-    }
-}
-function moveGhostLeft() {
-    if ((grid[ghost.y][ghost.x - 1] !== STONE) && (grid[ghost.y][ghost.x + 1] !== KEY)) {
-        let last = grid[ghost.y][ghost.x - 1];
-        grid[ghost.y][ghost.x] = last;
-        ghost.x = ghost.x - 1;
-        grid[ghost.y][ghost.x] = MUMMY;
-    }
-}
-
-function moveGhostUp() {
-    if (grid[ghost.y - 1][ghost.x] !== STONE) {
-        let last = grid[ghost.y - 1][ghost.x];
-        grid[ghost.y][ghost.x] = last;
-        ghost.y = ghost.y - 1;
-        grid[ghost.y][ghost.x] = MUMMY;
-    }
-}
-
-function moveGhost() {
-
-    if ((pacman.x > ghost.x) && (pacman.y > ghost.y)) {
-        moveGhostDown();
-        moveGhostRight();
-    } else if ((pacman.x < ghost.x) && (pacman.y < ghost.y)) {
-        moveGhostUp();
-        moveGhostLeft();
-    } else if ((pacman.x >= ghost.x) && (pacman.y <= ghost.y)) {
-        moveGhostRight();
-    } else if ((pacman.x <= ghost.x) && (pacman.y <= ghost.y)) {
-        moveGhostLeft();
-    }
-}
-
 function moveDown() {
     pacman.direction = 'down';
 
@@ -296,10 +239,6 @@ function setupKeyboardControls() {
         gameOver();
     });
 }
-
-// console.log([ghost.y, ghost.x])
-// console.log([pacman.y, pacman.x])
-// console.log(grid[ghost.y][ghost.x])
 
 // let start = grid[ghost.y][ghost.x]
 // let end = grid[pacman.y][pacman.x]
