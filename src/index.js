@@ -15,8 +15,8 @@ const MUMMY = 8;
 let gameData = [
     [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 4, 4, 4, 4, 8, 1, 4, 4, 4, 4, 4, 1],
-        [1, 4, 6, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
+        [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
+        [1, 4, 6, 1, 1, 8, 1, 4, 1, 1, 1, 4, 1],
         [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
         [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
         [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
@@ -54,8 +54,14 @@ let pacman = {
 
 let ghost = {
     x: 5,
-    y: 1,
+    y: 2
 };
+
+// let ghosts = [
+//     { x: 5, y: 1,}, 
+//     { x: 11, y: 1,}, 
+// ];
+
 
 let door = {
     x: 11,
@@ -135,15 +141,19 @@ function eraseMap() {
 }
 
 function gameOver() {
-    if (score === 1080) {
-        document.getElementById('game-over').textContent = "You win!!!"
-        eraseMap();
+    if (score === 1050) {
+        document.getElementById('game-over').textContent = "You win!!!";
+        // eraseMap();
         playing = false;
     } else if ((grid[pacman.y + 1][pacman.x] === 8)
         || (grid[pacman.y - 1][pacman.x] === 8)
         || (grid[pacman.y][pacman.x + 1] === 8)
         || (grid[pacman.y][pacman.x - 1] === 8)) {
-        document.getElementById('game-over').textContent = "Game over"
+        document.getElementById('game-over').textContent = "Game over";
+        eraseMap();
+        playing = false;
+    } else if (grid[pacman.y][pacman.x] === grid[ghost.y][ghost.x]) {
+        document.getElementById('game-over').textContent = "Game over";
         eraseMap();
         playing = false;
     }
@@ -172,8 +182,9 @@ function doorUnlock() {
     }
 }
 
+
 function moveGhostDown() {
-    if ((grid[ghost.y + 1][ghost.x] !== STONE) && (grid[ghost.y + 1][ghost.x] !== KEY)) {
+    if ((grid[ghost.y + 1][ghost.x] !== STONE)) {
         let last = grid[ghost.y + 1][ghost.x];
         grid[ghost.y][ghost.x] = last;
         ghost.y = ghost.y + 1;
@@ -204,6 +215,21 @@ function moveGhostUp() {
         grid[ghost.y][ghost.x] = last;
         ghost.y = ghost.y - 1;
         grid[ghost.y][ghost.x] = MUMMY;
+    }
+}
+
+function moveGhost() {
+
+    if ((pacman.x > ghost.x) && (pacman.y > ghost.y)) {
+        moveGhostDown();
+        moveGhostRight();
+    } else if ((pacman.x < ghost.x) && (pacman.y < ghost.y)) {
+        moveGhostUp();
+        moveGhostLeft();
+    } else if ((pacman.x >= ghost.x) && (pacman.y <= ghost.y)) {
+        moveGhostRight();
+    } else if ((pacman.x <= ghost.x) && (pacman.y <= ghost.y)) {
+        moveGhostLeft();
     }
 }
 
@@ -284,24 +310,14 @@ function setupKeyboardControls() {
         screenScore();
         doorUnlock();
         levelChange();
+        moveGhost();
         eraseMap();
         drawMap();
-        moveGhost();
         gameOver();
+        // console.log([ghost.y, ghost.x])
+        // console.log([pacman.y, pacman.x])
+        // console.log(grid[ghost.y][ghost.x])
     });
-}
-
-function moveGhost() {
-
-    if ((pacman.x > ghost.x) && (pacman.y > ghost.y)) {
-        moveGhostDown();
-    } else if ((pacman.x < ghost.x) && (pacman.y < ghost.y)) {
-        moveGhostUp();
-    } else if ((pacman.x >= ghost.x) && (pacman.y <= ghost.y)) {
-        moveGhostRight();
-    } else if ((pacman.x <= ghost.x) && (pacman.y <= ghost.y)) {
-        moveGhostLeft();
-    }
 }
 
 // let start = grid[ghost.y][ghost.x]
@@ -313,7 +329,7 @@ function moveGhost() {
 function main() {
     drawMap();
     setupKeyboardControls();
-    moveGhost();
+    // moveGhost();
 }
 
 main();
