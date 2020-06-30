@@ -16,6 +16,7 @@ Use arrow keys to move around the game board, M for muting / unmuting background
 The game was developed employing only native JavaScript DOM manipulation, HTML5 and CSS. No extrernal libraries were utilized.
 
 Actions in the Crypt Pac are controlled by a key event listener and are based on user input.
+
 <img width="561" alt="Screen Shot 2020-06-30 at 10 16 41" src="https://user-images.githubusercontent.com/59717705/86137351-3475af80-babb-11ea-82d4-2923b2fc6087.png">
     
 ## Future features
