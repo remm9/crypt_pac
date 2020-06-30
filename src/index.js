@@ -114,10 +114,10 @@ function drawMap() {
 }
 
 function eraseMap() {
-    if (playing) {
-        document.getElementById('body').removeChild(map)
-    } else {
+    if (playing === false) {
         document.getElementById('body')
+    } else {
+        document.getElementById('body').removeChild(map)
     }
     // document.body.removeChild(map);
 }
