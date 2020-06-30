@@ -73,17 +73,19 @@ let key = {
     y: 2,
 }
 
-let musicPlay;
+let musicPlay = true;
 
 function toggleMute() {
     const audio = document.getElementsByTagName('audio')[0];
     if (musicPlay == true) {
         musicPlay = false;
         audio.pause();
+        // audio.muted() //= !audio.muted;
         document.getElementById('background-music').textContent = "Press M to unmute";
     } else {
         musicPlay = true;
         audio.play();
+        // !audio.muted();
         document.getElementById('background-music').textContent = "Press M to mute";
     }
     return musicPlay;
@@ -152,10 +154,12 @@ function gameOver() {
         document.getElementById('game-over').textContent = "Game over";
         eraseMap();
         playing = false;
+        drawMap();
     } else if (grid[pacman.y][pacman.x] === grid[ghost.y][ghost.x]) {
         document.getElementById('game-over').textContent = "Game over";
         eraseMap();
         playing = false;
+        drawMap();
     }
 }
 
@@ -327,8 +331,8 @@ function setupKeyboardControls() {
 // return result
 
 function main() {
-    drawMap();
     setupKeyboardControls();
+    drawMap();
     // moveGhost();
 }
 
