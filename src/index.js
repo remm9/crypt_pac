@@ -1,6 +1,6 @@
 import './styles/index.scss'
 import './styles/reset.scss'
-// import * as toggleMute from './scripts/music.js'
+import { toggleMute } from './scripts/music.js'
 
 // window.addEventListener("DOMContentLoaded", main);
 
@@ -74,24 +74,6 @@ let key = {
     y: 2,
 }
 
-let musicPlay;
-
-function toggleMute() {
-    const audio = document.getElementsByTagName('audio')[0];
-    if (musicPlay == true) {
-        musicPlay = false;
-        audio.pause();
-        // audio.muted() //= !audio.muted;
-        document.getElementById('background-music').textContent = "Press M to unmute";
-    } else {
-        musicPlay = true;
-        audio.play();
-        // !audio.muted();
-        document.getElementById('background-music').textContent = "Press M to mute";
-    }
-    return musicPlay;
-}
-
 function createTiles(data) {
     let tilesArray = [];
     data.forEach(row => {
@@ -128,7 +110,6 @@ function createTiles(data) {
 function drawMap() {
     if (playing) {
         map = document.createElement('div');
-        // console.log(grid)
         let tiles = createTiles(grid);
         tiles.forEach(tile => {
             map.appendChild(tile);
@@ -139,7 +120,11 @@ function drawMap() {
 }
 
 function eraseMap() {
-    document.getElementById('body').removeChild(map)
+    if (playing) {
+        document.getElementById('body').removeChild(map)
+    } else {
+        document.getElementById('body')
+    }
     // document.body.removeChild(map);
 }
 
@@ -169,7 +154,6 @@ function levelChange() {
         level = 2;
         pacman.direction = "left";
         grid = gameData[1];
-        // alert("You are in Level 1")
     }
 }
 
@@ -227,7 +211,7 @@ function moveGhost() {
 
     if ((pacman.x > ghost.x) && (pacman.y > ghost.y)) {
         moveGhostDown();
-        // moveGhostRight();
+        moveGhostRight();
     } else if ((pacman.x < ghost.x) && (pacman.y < ghost.y)) {
         moveGhostUp();
         moveGhostLeft();
@@ -289,7 +273,6 @@ function moveRight() {
 
 function setupKeyboardControls() {
     document.addEventListener('keydown', function (e) {
-        // console.log(e.keyCode);
         if (e.keyCode === 37) {
             moveLeft();
         } else if (e.keyCode === 38) {
@@ -302,14 +285,6 @@ function setupKeyboardControls() {
             window.location.reload();
         } else if (e.keyCode === 77) {
             toggleMute();
-            // } else if (e.keyCode === 65) {
-            //     moveGhostLeft();
-            // } else if (e.keyCode === 90) {
-            //     moveGhostDown();
-            // } else if (e.keyCode === 83) {
-            //     moveGhostRight();
-            // } else if (e.keyCode === 87) {
-            //     moveGhostUp();
         }
         screenLevel();
         screenScore();
@@ -319,11 +294,12 @@ function setupKeyboardControls() {
         eraseMap();
         drawMap();
         gameOver();
-        // console.log([ghost.y, ghost.x])
-        // console.log([pacman.y, pacman.x])
-        // console.log(grid[ghost.y][ghost.x])
     });
 }
+
+// console.log([ghost.y, ghost.x])
+// console.log([pacman.y, pacman.x])
+// console.log(grid[ghost.y][ghost.x])
 
 // let start = grid[ghost.y][ghost.x]
 // let end = grid[pacman.y][pacman.x]
