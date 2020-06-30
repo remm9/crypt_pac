@@ -1,5 +1,6 @@
 import './styles/index.scss'
 import './styles/reset.scss'
+// import * as toggleMute from './scripts/music.js'
 
 // window.addEventListener("DOMContentLoaded", main);
 
