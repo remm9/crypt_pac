@@ -5,7 +5,7 @@
 Crypt Pack is a game inspired by Crypt Rider and Pacman. The objective of the game is to collect as many resources as possible by mooving around a maze and avoiding mummies and grabbing a key to progress to next level.
 
 ## Instructions
-Use arrow keys to move around the game board, M for muting / unmuting background music and R to restart the game. Don't let the mummy get too close to you. It leaps for the final attack. The best screen width for playing the game is above 1100px. 
+Use arrow keys to move around the game board, M for muting / unmuting background music and R to restart the game. Don't let the mummy get too close to you. It leaps two tiles for the final attack. The best screen width for playing the game is above 1100px. 
 
 ## Technology employed 
   - JavaScript for game logic
@@ -14,7 +14,6 @@ Use arrow keys to move around the game board, M for muting / unmuting background
   
 ## Implementation and Features 
 The game was developed employing only native JavaScript DOM manipulation, HTML5 and CSS. No extrernal libraries were utilized.
-
 Actions in the Crypt Pac are controlled by a key event listener and are based on user input.
 
 <img width="561" alt="Screen Shot 2020-06-30 at 10 16 41" src="https://user-images.githubusercontent.com/59717705/86137351-3475af80-babb-11ea-82d4-2923b2fc6087.png">
