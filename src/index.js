@@ -222,7 +222,7 @@ function moveGhost() {
 
     if ((pacman.x > ghost.x) && (pacman.y > ghost.y)) {
         moveGhostDown();
-        moveGhostRight();
+        // moveGhostRight();
     } else if ((pacman.x < ghost.x) && (pacman.y < ghost.y)) {
         moveGhostUp();
         moveGhostLeft();
