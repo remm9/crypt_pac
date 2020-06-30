@@ -73,7 +73,7 @@ let key = {
     y: 2,
 }
 
-let musicPlay = true;
+let musicPlay;
 
 function toggleMute() {
     const audio = document.getElementsByTagName('audio')[0];
