@@ -1,28 +1,19 @@
 # crypt_pac
 
+<img width="1193" alt="Screen Shot 2020-06-30 at 09 58 28" src="https://user-images.githubusercontent.com/59717705/86135126-66394700-bab8-11ea-8ae6-33a3f5181d64.png">
+
 Crypt Pack is a game inspired by Crypt Rider and Pacman. The objective of the game is to collect as many resources as possible by mooving around a maze and avoiding mummies and grabbing a key to progress to next level.
 
-## Functionality MVPs
-
-  ### the user will be able 
-  - start a game 
-  - move around crypt
-  - abort game
-  
-  ### will be given three lives  
-  
-## Wireframes && File Structure
-![IMG_0331](https://user-images.githubusercontent.com/59717705/85587637-f5a1ae80-b60f-11ea-8ed7-d96811933b13.JPG)
-
+All features in this game were implemented using native JavaScript DOM manipulation, HTML5 and CSS. No extrernal libraries were utilized.
 
 ## Technology employed 
   - JavaScript for game logic
-  - HTML5 canvas/CSS animation
+  - HTML5 Audio
+  - CSS animation
   
-## Implementation Timeline
-  - day 1: seting up js project, creating game logic
-  - day 2: canvas
-  - day 3: readme
   
-## Bonus 
-  - add music with a button to mute/unmute
+## Future features
+  - add more levels with increased dificulty
+  
+## Legal
+  - Visual assetes and background music in this project are used for educational purposes only. All assets are property of Crypt-Rider and Pacman.
