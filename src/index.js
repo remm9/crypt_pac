@@ -15,8 +15,8 @@ const MUMMY = 8;
 let gameData = [
     [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1],
-        [1, 4, 6, 1, 1, 8, 1, 4, 1, 1, 1, 4, 1],
+        [1, 4, 4, 4, 4, 8, 1, 4, 4, 4, 4, 4, 1],
+        [1, 4, 6, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1],
         [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
         [1, 4, 4, 4, 1, 1, 5, 1, 1, 4, 4, 4, 1],
         [1, 4, 1, 4, 4, 4, 4, 4, 4, 4, 1, 4, 1],
@@ -54,7 +54,7 @@ let pacman = {
 
 let ghost = {
     x: 5,
-    y: 2
+    y: 1
 };
 
 // let ghosts = [
@@ -80,10 +80,12 @@ function toggleMute() {
     if (musicPlay == true) {
         musicPlay = false;
         audio.pause();
+        // audio.muted() //= !audio.muted;
         document.getElementById('background-music').textContent = "Press M to unmute";
     } else {
         musicPlay = true;
         audio.play();
+        // !audio.muted();
         document.getElementById('background-music').textContent = "Press M to mute";
     }
     return musicPlay;
@@ -152,10 +154,12 @@ function gameOver() {
         document.getElementById('game-over').textContent = "Game over";
         eraseMap();
         playing = false;
+        drawMap();
     } else if (grid[pacman.y][pacman.x] === grid[ghost.y][ghost.x]) {
         document.getElementById('game-over').textContent = "Game over";
         eraseMap();
         playing = false;
+        drawMap();
     }
 }
 
@@ -327,9 +331,8 @@ function setupKeyboardControls() {
 // return result
 
 function main() {
-    drawMap();
     setupKeyboardControls();
-    // moveGhost();
+    drawMap();
 }
 
 main();
