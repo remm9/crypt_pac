@@ -333,7 +333,6 @@ function setupKeyboardControls() {
 function main() {
     setupKeyboardControls();
     drawMap();
-    // moveGhost();
 }
 
 main();
