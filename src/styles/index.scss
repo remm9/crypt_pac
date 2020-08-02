@@ -76,7 +76,6 @@
   justify-content: space-between;
   width: 650px;
   margin: auto;
-  margin-top: 50px;
   font-size: 20px;
   font-weight: bold;
 }
@@ -195,4 +194,97 @@
   align-self: center;
   margin-top: 50px;
 }
+
+.info-div {
+  background-color: transparent;
+  color: yellow;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100px;
+  display: grid;
+  margin: auto;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-top: 20px;
+}
+
+.info-div .game-play-instructions {
+  visibility: hidden;
+  width: 600px;
+  height: 300px;
+  background-color: lightgray;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -1350%;
+  left: 50%;
+  margin-left: -300px;
+}
+
+.info-div .game-play-instructions::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.info-div .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+.instructions-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.about-title {
+  margin-top: 10px;
+  max-width: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  align-self: center;
+  margin-left: 15px;
+}
+
+.about-p {
+  font-size: 17px;
+  font-weight: 500;
+  text-align: left;
+  margin: 15px;
+  width: 272px;
+}
+
+.about-close {
+  font-size: 15px;
+  margin-top: 27px;
+}
+
 

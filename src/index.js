@@ -165,6 +165,17 @@ function doorUnlock() {
     }
 }
 
+const openAbout = (e) => {
+    const aboutScreen = document.getElementsByClassName('info-div')[0];
+    console.log(aboutScreen)
+    if (aboutScreen.className.indexOf('info-div') !== -1) {
+        aboutScreen.className = 'game-play-instructions';
+        
+    } else {
+        aboutScreen.className += 'info-div';
+    }
+};
+
 function moveDown() {
     pacman.direction = 'down';
 
@@ -214,6 +225,14 @@ function moveRight() {
     }
 }
 
+function setUpMusucToggle() {
+    document.addEventListener('keyup', function(e) {
+        if (e.keyCode === 77) {
+            toggleMute();
+        }
+    }); 
+}
+
 function setupKeyboardControls() {
     document.addEventListener('keydown', function (e) {
         if (e.keyCode === 37) {
@@ -226,9 +245,7 @@ function setupKeyboardControls() {
             moveDown();
         } else if (e.keyCode === 82) {
             window.location.reload();
-        } else if (e.keyCode === 77) {
-            toggleMute();
-        }
+        } 
         screenLevel();
         screenScore();
         doorUnlock();
@@ -247,8 +264,10 @@ function setupKeyboardControls() {
 // return result
 
 function main() {
+    setUpMusucToggle();
     setupKeyboardControls();
     drawMap();
+    // openAbout();
 }
 
 main();

@@ -18,7 +18,36 @@
     <meta property="og:image:height" content="300" />
 </head>
 <body>
+    <div class="info-div" onclick="myFunction()">Info
+        <span class="game-play-instructions" id="myPopup">
+            <div class="instructions-container">
+                <div class="container-left">
+                    <h2 class="about-title">About</h2>
+                    <p class="about-p">Crypt Pack is a game inspired by Crypt Rider and Pacman. The objective 
+                        of the game is to collect as many resources as
+                        possible by mooving around a maze and avoiding mummies 
+                        and grabbing a key to progress to next level.</p>
+                </div>
+                <div class="container-right">
+                    <h2 class="about-title">Instructions</h2>
+                    <p class="about-p">Use arrow keys to move around the game board, M for muting / 
+                        unmuting background music and R to restart the game. Don't
+                        let the mummy get too close to you. It leaps two tiles for the 
+                        final attack. The best screen width for playing the game
+                        is above 1100px.</p>
+                </div>
+            </div>
+            <p class="about-close">Click anywhere on this window to close</p>
+        </span>
+    </div>
+    <script>
+        function myFunction() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+        }
+    </script>
     <div id="game-info">
+
         <div id="level">Level: 1</div>
         <div id="music">
             <audio src="./src/assets/music.mp3" type="mp3" loop></audio>
@@ -41,8 +70,7 @@
             </a>
         </div>
     </div>
-    <div id="body">
-    </div>
+    <div id="body"></div>
     <div id="game-controls">
         <div id="background-music">Press M to unmute</div>
         <div class="restart">Press R to reload</div>
