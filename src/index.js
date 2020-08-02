@@ -165,17 +165,6 @@ function doorUnlock() {
     }
 }
 
-const openAbout = (e) => {
-    const aboutScreen = document.getElementsByClassName('info-div')[0];
-    console.log(aboutScreen)
-    if (aboutScreen.className.indexOf('info-div') !== -1) {
-        aboutScreen.className = 'game-play-instructions';
-        
-    } else {
-        aboutScreen.className += 'info-div';
-    }
-};
-
 function moveDown() {
     pacman.direction = 'down';
 
@@ -267,7 +256,6 @@ function main() {
     setUpMusucToggle();
     setupKeyboardControls();
     drawMap();
-    // openAbout();
 }
 
 main();

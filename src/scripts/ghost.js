@@ -45,7 +45,9 @@ export function moveGhost() {
         moveGhostLeft();
     } else if ((pacman.x >= ghost.x) && (pacman.y <= ghost.y)) {
         moveGhostRight();
+        moveGhostUp();
     } else if ((pacman.x <= ghost.x) && (pacman.y <= ghost.y)) {
         moveGhostLeft();
+        moveGhostDown();
     }
 }
